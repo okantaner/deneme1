@@ -1,0 +1,52 @@
+extends layout
+
+block content
+    form#formDraft(name="gotodraft",method="get",action="/newuser")
+        button#btnDraft(type="submit") Adam Almak Icin Tiklayin
+    h1.
+        INANILMAZ DRAFT SITESI
+    #grup
+        #kamil
+            h2 kamil
+            ul
+                each user in kamil
+                    li
+                        p=user.username
+        #jr
+            h2 jr
+            ul
+                each user in jr
+                    li
+                        p=user.username
+         #okan
+            h2 okan
+            ul
+                each user in okan
+                    li
+                        p=user.username
+        #ulas
+            h2 ulas
+            ul
+                each user in ulas
+                    li
+                        p=user.username
+        #bura
+            h2 bura
+            ul
+                each user in bura
+                    li
+                        p=user.username
+        #emre
+            h2 emre
+            ul
+                each user in emre
+                    li
+                        p=user.username
+        #onur
+            h2 onur
+            ul
+                each user in onur
+                    li
+                        p=user.username
+
+        

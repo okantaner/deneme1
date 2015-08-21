@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    #newuser
+        h1= title
+        form#formAddUser(name="adduser",method="post",action="/adduser")
+            input#inputUserName(type="text", placeholder="Kimi Alcan?", name="username")
+            br  
+            input#password(type="text", placeholder="Sifre", name="password")
+            br
+            button#btnSubmit(type="submit") Gonder

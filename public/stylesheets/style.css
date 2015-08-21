@@ -1,0 +1,83 @@
+h1 {
+    font-family: 'Nunito', sans-serif;
+}
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+#inputUserName {
+    width: 150px;
+    height: 30px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-family: 'Nunito', sans-serif;
+    margin-left: 43%;
+    margin-right: 43%;
+}
+
+#grup, #newuser {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+
+
+}
+#password {
+    width: 150px;
+    height: 30px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-family: 'Nunito', sans-serif;
+    margin-left: 43%;
+    margin-right: 43%;
+}
+
+#btnSubmit, #btnDraft {
+    height: 30px;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 5px;
+    background-color: azure;
+    margin-left: 43%;
+    margin-right: 43%;
+    margin-bottom: 20px;
+}
+
+#btnSubmit {
+    width: 160px; 
+}
+
+#btnDraft {
+    width: 200px; 
+}
+
+a {
+  color: #00B7FF;
+}
+
+#onur, #kamil, #emre, #ulas, #jr, #okan, #bura {
+    width: 300px;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.ind {
+    width: 20px;
+    height: 20px;
+    background-color: #2d2d2d;
+    margin-left: 140px;
+}
+
+
+h2 {
+    text-align: center;
+    font-size: 1.25em;
+}
+
+h1 {
+   text-align: center;
+    font-size: 2.50em;
+
+
+}
