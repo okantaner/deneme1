@@ -18,6 +18,9 @@ block content
                 each user in jr
                     li
                         p=user.username
+            script.
+                var listLi = document.querySelectorAll("#jr li");
+                var listLengthJ = listLi.length;
          #okan
             h2 okan
             ul
@@ -48,5 +51,20 @@ block content
                 each user in onur
                     li
                         p=user.username
+    script.
+        var listKamil = document.querySelectorAll("#kamil li"); var listLengthKamil = listKamil.length;
+        var listJr = document.querySelectorAll("#jr li"); var listLengthJr = listJr.length;
+        var listOkan = document.querySelectorAll("#okan li"); var listLengthOkan = listOkan.length;
+        var listUlas = document.querySelectorAll("#ulas li"); var listLengthUlas = listUlas.length;
+        var listBura = document.querySelectorAll("#bura li"); var listLengthBura = listBura.length;
+        var listEmre = document.querySelectorAll("#emre li"); var listLengthEmre = listEmre.length;
+        var listOnur = document.querySelectorAll("#onur li"); var listLengthOnur = listOnur.length;        
+        if (listLengthKamil === listLengthOnur) {document.getElementById("kamil").className += " selected";}
+        if (listLengthKamil-1 === listLengthJr) {document.getElementById("jr").className += " selected";}
+        if (listLengthJr - 1 === listLengthOkan) {document.getElementById("okan").className += " selected";}
+        if (listLengthOkan - 1 === listLengthUlas) {document.getElementById("ulas").className += " selected";}
+        if (listLengthUlas - 1 === listLengthBura) {document.getElementById("bura").className += " selected";}
+        if (listLengthBura - 1 === listLengthEmre) {document.getElementById("emre").className += " selected";}
+        if (listLengthEmre - 1 === listLengthOnur) {document.getElementById("onur").className += " selected";}
 
         

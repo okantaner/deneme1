@@ -1,54 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+
 h1 {
     font-family: 'Nunito', sans-serif;
+    text-align: center;
+    margin-bottom: 15px;
 }
 body {
-  padding: 50px;
+  padding: 5%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  overflow-x:hidden;
 }
 
-#inputUserName {
-    width: 150px;
+#inputUserName, #password {
     height: 30px;
     margin-bottom: 15px;
     border-radius: 5px;
     font-family: 'Nunito', sans-serif;
-    margin-left: 43%;
-    margin-right: 43%;
+    width: 100%;
+    max-width: 250px;
 }
 
-#grup, #newuser {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-
-
+#newuser {
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
 }
-#password {
-    width: 150px;
-    height: 30px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    font-family: 'Nunito', sans-serif;
-    margin-left: 43%;
-    margin-right: 43%;
+
+#grup {
+    width: 100%;
 }
 
 #btnSubmit, #btnDraft {
-    height: 30px;
     font-family: 'Nunito', sans-serif;
     border-radius: 5px;
     background-color: azure;
-    margin-left: 43%;
-    margin-right: 43%;
     margin-bottom: 20px;
 }
 
 #btnSubmit {
-    width: 160px; 
+    width: 100%;
+    max-width: 250px;
+    height: 30px;
 }
 
 #btnDraft {
-    width: 200px; 
+    max-width: 150px;
+    width: 100%;
+    font-size: 1em;
+    height: 50px;
+}
+
+#formDraft {
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
 }
 
 a {
@@ -56,19 +63,11 @@ a {
 }
 
 #onur, #kamil, #emre, #ulas, #jr, #okan, #bura {
-    width: 300px;
+    width: 280px;
     float: left;
     margin-left: 10px;
     margin-right: 10px;
 }
-
-.ind {
-    width: 20px;
-    height: 20px;
-    background-color: #2d2d2d;
-    margin-left: 140px;
-}
-
 
 h2 {
     text-align: center;
@@ -78,6 +77,28 @@ h2 {
 h1 {
    text-align: center;
     font-size: 2.50em;
+}
 
+.selected {
+    color: green;
+}
+
+.error {
+    text-align: center;
+    font-size: 1.25em;
+    font-family: 'Nunito', sans-serif;
+}
+
+@media (min-width: 720px) {
+#formDraft {
+    width: 20%;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+#newuser {
+    width: 20%;
+    margin-left: 40%;
+    margin-right: 40%;
+}
 
 }

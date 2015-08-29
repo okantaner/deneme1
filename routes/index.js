@@ -17,22 +17,7 @@ if (process.env.OPENSHIFT_MONGODB_DB_URL) {
     mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + db_name;
 }
 
-
-/* BUNU SOR
-var filldbK = function () {
-    var MongoClient = require('mongodb').MongoClient;
-    MongoClient.connect(mongodb_connection_string, function (err, db) {
-    if (err) throw err;
-        var dmz = db.collection('kamil').find().toArray(function (err, items) {
-        ext.push(items);               // dýþarda tanýmladýðým arraye bunu atamýyorum
-        console.log(items);             // konsola yazabiliyorum, return edemiyorum
-        });                                // bu itemsý bi variable a nasýl atarým
-        console.log(dmz);               // bu undefined veriyo
-});}                                  
-*/ 
-
-
-/* GET Userlist page. */
+/* Drafted */
     var dataHandler = function (req, res) {
 
     var db = req.db;
@@ -54,31 +39,31 @@ var filldbK = function () {
 
         async.parallel([
             function (callback) {
-            getkamil(callback);
+            getkamil();
             callback();
             },
             function (callback) {
-            getjr(callback);
+            getjr();
             callback();
             },
             function (callback) {
-            getokan(callback);
+            getokan();
             callback();
             },
             function (callback) {
-            getulas(callback);
+            getulas();
             callback();
             },
             function (callback) {
-            getbura(callback);
+            getbura();
             callback();
             },
             function (callback) {
-            getemre(callback);
+            getemre();
             callback();
             },
             function(callback) {
-            getonur(callback);
+            getonur();
             callback();
         }
         ], function (err) {
@@ -86,7 +71,6 @@ var filldbK = function () {
             }
         else {
             setTimeout(function () { res.render('drafted'); }, 0400);
-
             }
         });
     };
@@ -95,16 +79,16 @@ var filldbK = function () {
 
 
 
-/* GET New User page. */
+/* Newuser */
 router.get('/newuser', function (req, res) {
     res.render('newuser', { title: 'Adam Almaca' });
 });
 
 
-/* POST to Add User Service */
+/* Adduser */
 router.post('/adduser', function (req, res) {
     
-    // Set our internal DB variable
+    // Monk için db parametreleri
     var db = req.db;
     var kamildb = db.get('kamil');
     var jrdb = db.get('jr');
@@ -114,23 +98,20 @@ router.post('/adduser', function (req, res) {
     var emredb = db.get('emre');
     var onurdb = db.get('onur');
 
-    // Get our form values. These rely on the "name" attributes
+    // Newuser daki formlarýn tanýmlarý
     var userName = req.body.username;
-    var pass = req.body.password;
-    
-    // Set our collection
-    
-    // Submit to the DB
-    if (pass !== "kamil" && pass !== "jr" && pass !== "okan" && pass !== "bura" && pass !== "emre" && pass !== "onur" && pass !== "ulas") { res.send("WRONG PASSWORD")} 
-    if (pass === "kamil") { kamildb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.send("There was a problem adding the information to the database."); } else { res.redirect("drafted"); } }); }
-    if (pass === "jr") { jrdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.send("There was a problem adding the information to the database."); } else { res.redirect("drafted"); } }); }
-    if (pass === "okan") { okandb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.send("There was a problem adding the information to the database."); } else { res.redirect("drafted"); } }); }
-    if (pass === "ulas") { ulasdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.send("There was a problem adding the information to the database."); } else { res.redirect("drafted"); } }); }
-    if (pass === "bura") { buradb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.send("There was a problem adding the information to the database."); } else { res.redirect("drafted"); } }); } 
-    if (pass === "emre") { emredb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.send("There was a problem adding the information to the database."); } else { res.redirect("drafted"); } }); } 
-    if (pass === "onur") { onurdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.send("There was a problem adding the information to the database."); } else { res.redirect("drafted"); } }); } 
+    var pass = req.body.password;    
 
+    // DB'e aktarým
+    if (pass !== "kamil" && pass !== "jr" && pass !== "okan" && pass !== "bura" && pass !== "emre" && pass !== "onur" && pass !== "ulas") { res.render('myerror', { message: "Hatali Sifre" });} 
+    if (pass === "kamil") { kamildb.count({}, function (error, count) { onurdb.count({}, function (error, count2) { if (count <= count2) { { kamildb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil"}); }) }); }
+    if (pass === "jr") { jrdb.count({}, function (error, count) { kamildb.count({}, function (error, count2) { if (count === count2-1) { { jrdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
+    if (pass === "okan") { okandb.count({}, function (error, count) { jrdb.count({}, function (error, count2) { if (count === count2 - 1) { { okandb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
+    if (pass === "ulas") { ulasdb.count({}, function (error, count) { okandb.count({}, function (error, count2) { if (count === count2 - 1) { { ulasdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
+    if (pass === "bura") { buradb.count({}, function (error, count) { ulasdb.count({}, function (error, count2) { if (count === count2 - 1) { { buradb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
+    if (pass === "emre") { emredb.count({}, function (error, count) { buradb.count({}, function (error, count2) { if (count === count2 - 1) { { emredb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
+    if (pass === "onur") { onurdb.count({}, function (error, count) { emredb.count({}, function (error, count2) { if (count === count2 - 1) { { onurdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
 });
 
-
 module.exports = router;
+

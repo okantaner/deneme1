@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1= "HATA"
+    .error 
+        p= message
+    script. 
+        setTimeout(function () { window.location="/drafted" }, 2000);
+
