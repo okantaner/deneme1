@@ -3,8 +3,10 @@ extends layout
 block content
     form#formDraft(name="gotodraft",method="get",action="/newuser")
         button#btnDraft(type="submit") Adam Almak Icin Tiklayin
-    h1.
-        INANILMAZ DRAFT SITESI
+            script.
+                $("#btnDraft").click(function(event) {event.preventDefault();$("#formDraft, .slide2, #grup").fadeOut(500, function(){$("#formDraft").submit();});});
+    .slide2
+      h1 INANILMAZ DRAFT SITESI
     #grup
         #kamil
             h2 kamil
@@ -21,6 +23,10 @@ block content
             script.
                 var listLi = document.querySelectorAll("#jr li");
                 var listLengthJ = listLi.length;
+                $("#grup, .slide2, #formDraft").hide();
+                $("#grup").delay(1000).fadeIn(500);
+                $(".slide2").delay(500).fadeIn(500);
+                $("#formDraft").fadeIn(500);
          #okan
             h2 okan
             ul
@@ -66,5 +72,3 @@ block content
         if (listLengthUlas - 1 === listLengthBura) {document.getElementById("bura").className += " selected";}
         if (listLengthBura - 1 === listLengthEmre) {document.getElementById("emre").className += " selected";}
         if (listLengthEmre - 1 === listLengthOnur) {document.getElementById("onur").className += " selected";}
-
-        

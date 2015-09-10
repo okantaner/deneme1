@@ -103,14 +103,23 @@ router.post('/adduser', function (req, res) {
     var pass = req.body.password;    
 
     // DB'e aktarım
-    if (pass !== "kamil" && pass !== "jr" && pass !== "okan" && pass !== "bura" && pass !== "emre" && pass !== "onur" && pass !== "ulas") { res.render('myerror', { message: "Hatali Sifre" });} 
+    if (pass !== "kamil" && pass !== "jr" && pass !== "okan" && pass !== "bura" && pass !== "emre" && pass !== "onur" && pass !== "ulas" && pass !== "koyaminakoykoy") { res.render('myerror', { message: "Hatali Sifre" });} 
     if (pass === "kamil") { kamildb.count({}, function (error, count) { onurdb.count({}, function (error, count2) { if (count <= count2) { { kamildb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil"}); }) }); }
     if (pass === "jr") { jrdb.count({}, function (error, count) { kamildb.count({}, function (error, count2) { if (count === count2-1) { { jrdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
     if (pass === "okan") { okandb.count({}, function (error, count) { jrdb.count({}, function (error, count2) { if (count === count2 - 1) { { okandb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
     if (pass === "ulas") { ulasdb.count({}, function (error, count) { okandb.count({}, function (error, count2) { if (count === count2 - 1) { { ulasdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
     if (pass === "bura") { buradb.count({}, function (error, count) { ulasdb.count({}, function (error, count2) { if (count === count2 - 1) { { buradb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
     if (pass === "emre") { emredb.count({}, function (error, count) { buradb.count({}, function (error, count2) { if (count === count2 - 1) { { emredb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
-    if (pass === "onur") { onurdb.count({}, function (error, count) { emredb.count({}, function (error, count2) { if (count === count2 - 1) { { onurdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
+	if (pass === "onur") { onurdb.count({}, function (error, count) { emredb.count({}, function (error, count2) { if (count === count2 - 1) { { onurdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
+	if (pass === "koyaminakoykoy") {
+		kamildb.remove({}, function (err) { if (err) { res.render('myerror', { message: "Silemedim" }); }})
+		jrdb.remove({}, function (err, doc) { if (err) { res.render('myerror', { message: "Silemedim" }); }  })
+		okandb.remove({}, function (err, doc) { if (err) { res.render('myerror', { message: "Silemedim" }); }  })
+		ulasdb.remove({}, function (err, doc) { if (err) { res.render('myerror', { message: "Silemedim" }); }  })
+		buradb.remove({}, function (err, doc) { if (err) { res.render('myerror', { message: "Silemedim" }); }  })
+		emredb.remove({}, function (err, doc) { if (err) { res.render('myerror', { message: "Silemedim" }); }  })
+		onurdb.remove({}, function (err, doc) { if (err) { res.render('myerror', { message: "Silemedim" }); } else { res.redirect("drafted"); } })
+	}
 });
 
 module.exports = router;
