@@ -10,7 +10,6 @@ var fs = require('fs');
 var mongo = require('mongodb');
 var monk = require('monk');
 
-
 var app = express();
 
 var routes = require('./routes/index');
@@ -107,8 +106,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-
 
 
 module.exports = app;

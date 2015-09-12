@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var async = require('async');
 
+
 /* HOMEPAGE */
 router.get('/', function (req, res) {
     res.redirect('drafted'); 
@@ -9,7 +10,7 @@ router.get('/', function (req, res) {
 
 var ext = [];
 
-/* MONGO QUERY I�IN CLIENTLA BA�LANTI */ 
+/* MONGO QUERY IÃƒâ€¡IN CLIENTLA BAÃ„ÂLANTI */ 
 
 var db_name = "deneme1";
 mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + db_name;
@@ -88,7 +89,7 @@ router.get('/newuser', function (req, res) {
 /* Adduser */
 router.post('/adduser', function (req, res) {
     
-    // Monk i�in db parametreleri
+    // Monk iÃƒÂ§in db parametreleri
     var db = req.db;
     var kamildb = db.get('kamil');
     var jrdb = db.get('jr');
@@ -98,20 +99,170 @@ router.post('/adduser', function (req, res) {
     var emredb = db.get('emre');
     var onurdb = db.get('onur');
 
-    // Newuser daki formlar�n tan�mlar�
+    // Newuser daki formlarÃ„Â±n tanÃ„Â±mlarÃ„Â±
     var userName = req.body.username;
     var pass = req.body.password;    
 
-    // DB'e aktar�m
-    if (pass !== "kamil" && pass !== "jr" && pass !== "okan" && pass !== "bura" && pass !== "emre" && pass !== "onur" && pass !== "ulas" && pass !== "koyaminakoykoy") { res.render('myerror', { message: "Hatali Sifre" });} 
-    if (pass === "kamil") { kamildb.count({}, function (error, count) { onurdb.count({}, function (error, count2) { if (count <= count2) { { kamildb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil"}); }) }); }
-    if (pass === "jr") { jrdb.count({}, function (error, count) { kamildb.count({}, function (error, count2) { if (count === count2-1) { { jrdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
-    if (pass === "okan") { okandb.count({}, function (error, count) { jrdb.count({}, function (error, count2) { if (count === count2 - 1) { { okandb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
-    if (pass === "ulas") { ulasdb.count({}, function (error, count) { okandb.count({}, function (error, count2) { if (count === count2 - 1) { { ulasdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
-    if (pass === "bura") { buradb.count({}, function (error, count) { ulasdb.count({}, function (error, count2) { if (count === count2 - 1) { { buradb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
-    if (pass === "emre") { emredb.count({}, function (error, count) { buradb.count({}, function (error, count2) { if (count === count2 - 1) { { emredb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
-	if (pass === "onur") { onurdb.count({}, function (error, count) { emredb.count({}, function (error, count2) { if (count === count2 - 1) { { onurdb.insert({ "username" : userName, }, function (err, doc) { if (err) { res.render('myerror', { message: "Veritabanina baglanirken sorun olustu" }); } else { res.redirect("drafted"); } }); } } else res.render('myerror', { message: "Oyuncu secme sirasi sende degil" }); }) }); }
-	if (pass === "koyaminakoykoy") {
+    // DB'e aktarÃ„Â±m
+    if (pass !== "kamil" && pass !== "jr" && pass !== "okan" && pass !== "bura" && pass !== "emre" && pass !== "onur" && pass !== "ulas" && pass !== "koyaminakoykoy") { res.render('myerror', { message: "Hatalı Şifre" });} 
+    
+    if (pass === "kamil") {
+        kamildb.count({}, function (error, count) {
+            onurdb.count({}, function (error, count2) {
+                jrdb.count({}, function (error, count3) {
+                    if ((count + 1 === count3) || (count === count2 && count === 0) || (count === count2 && count === 2) || (count = count2 && count === 4)) {
+                        {
+                            kamildb.insert({
+                                "username" : userName,
+                            }, function (err, doc) {
+                                if (err) {
+                                    res.render('myerror', {
+                                        message: "Veritabanina baglanirken sorun olustu"
+                                    });
+                                } else { res.redirect("drafted"); }
+                            });
+                        }
+                    } else res.render('myerror', { message: "Oyuncu seçme sırası sende değil" });
+                })
+            })
+        });
+    }    
+    
+    if (pass === "jr") {
+        jrdb.count({}, function (error, count) {
+            kamildb.count({}, function (error, count2) {
+                okandb.count({}, function (error, count3) {
+                if (count === count2 - 1 || count === count3 - 1) {
+                    {
+                        jrdb.insert({
+                            "username" : userName,
+                        }, function (err, doc) {
+                            if (err) {
+                                res.render('myerror', {
+                                    message: "Veritabanina baglanirken sorun olustu"
+                                });
+                            } else { res.redirect("drafted"); }
+                        });
+                    }
+                } else res.render('myerror', { message: "Oyuncu seçme sırası sende değil" });
+                })
+            })
+        });
+    }
+    
+    if (pass === "okan") {
+        okandb.count({}, function (error, count) {
+            jrdb.count({}, function (error, count2) {
+                ulasdb.count({}, function (error, count3) {
+                    if (count === count2 - 1 || count === count3 - 1) {
+                        {
+                            okandb.insert({
+                                "username" : userName,
+                            }, function (err, doc) {
+                                if (err) {
+                                    res.render('myerror', {
+                                        message: "Veritabanina baglanirken sorun olustu"
+                                    });
+                                } else { res.redirect("drafted"); }
+                            });
+                        }
+                    } else res.render('myerror', { message: "Oyuncu seçme sırası sende değil" });
+                })
+            })
+        });
+    }
+    
+    if (pass === "ulas") {
+        ulasdb.count({}, function (error, count) {
+            okandb.count({}, function (error, count2) {
+                buradb.count({}, function (error, count3) {
+                    if (count === count2 - 1 || count === count3 - 1) {
+                        {
+                            ulasdb.insert({
+                                "username" : userName,
+                            }, function (err, doc) {
+                                if (err) {
+                                    res.render('myerror', {
+                                        message: "Veritabanina baglanirken sorun olustu"
+                                    });
+                                } else { res.redirect("drafted"); }
+                            });
+                        }
+                    } else res.render('myerror', { message: "Oyuncu seçme sırası sende değil" });
+                })
+            })
+        });
+    }
+    
+    if (pass === "bura") {
+        buradb.count({}, function (error, count) {
+            ulasdb.count({}, function (error, count2) {
+                emredb.count({}, function (error, count3) {
+                    if (count === count2 - 1 || count === count3 - 1) {
+                        {
+                            buradb.insert({
+                                "username" : userName,
+                            }, function (err, doc) {
+                                if (err) {
+                                    res.render('myerror', {
+                                        message: "Veritabanina baglanirken sorun olustu"
+                                    });
+                                } else { res.redirect("drafted"); }
+                            });
+                        }
+                    } else res.render('myerror', { message: "Oyuncu seçme sırası sende değil" });
+                })
+            })
+        });
+    }
+    
+    
+    if (pass === "emre") {
+        emredb.count({}, function (error, count) {
+            buradb.count({}, function (error, count2) {
+                onurdb.count({}, function (error, count3) {
+                    if (count === count2 - 1 || count === count3 - 1) {
+                        {
+                            emredb.insert({
+                                "username" : userName,
+                            }, function (err, doc) {
+                                if (err) {
+                                    res.render('myerror', {
+                                        message: "Veritabanina baglanirken sorun olustu"
+                                    });
+                                } else { res.redirect("drafted"); }
+                            });
+                        }
+                    } else res.render('myerror', { message: "Oyuncu seçme sırası sende değil" });
+                })
+            })
+        });
+    }    
+    
+    if (pass === "onur") {
+        onurdb.count({}, function (error, count) {
+            kamildb.count({}, function (error, count2) {
+                emredb.count({}, function (error, count3) {
+                    if ((count + 1 === count3) || (count === count2 && count === 1) || (count === count2 && count === 3) || (count = count2 && count === 5)) {
+                        {
+                            onurdb.insert({
+                                "username" : userName,
+                            }, function (err, doc) {
+                                if (err) {
+                                    res.render('myerror', {
+                                        message: "Veritabanina baglanirken sorun olustu"
+                                    });
+                                } else { res.redirect("drafted"); }
+                            });
+                        }
+                    } else res.render('myerror', { message: "Oyuncu seçme sırası sende değil" });
+                })
+            })
+        });
+    }    
+    
+    
+    if (pass === "koyaminakoykoy") {
 		kamildb.remove({}, function (err) { if (err) { res.render('myerror', { message: "Silemedim" }); }})
 		jrdb.remove({}, function (err, doc) { if (err) { res.render('myerror', { message: "Silemedim" }); }  })
 		okandb.remove({}, function (err, doc) { if (err) { res.render('myerror', { message: "Silemedim" }); }  })
