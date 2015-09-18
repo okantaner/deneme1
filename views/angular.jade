@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    .main
+      ul#people
+        li(ng-repeat='person in people', ng-class='person.profession')
+          input.name(type='text', ng-model='person.name')
+          input.profession(type='text', ng-model='person.profession')
+          input.hometown(type='text', ng-model='person.hometown')
+          button(ng-click='save(person)') Kaydet
+    .main
+          button(ng-click='delete()') Patlat
+    .debug
+      pre(ng-bind='people | json').

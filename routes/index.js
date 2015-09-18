@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
+var fs = require('fs');
+
 
 
 /* HOMEPAGE */
@@ -272,6 +274,37 @@ router.post('/adduser', function (req, res) {
 		onurdb.remove({}, function (err, doc) { if (err) { res.render('myerror', { message: "Silemedim" }); } else { res.redirect("drafted"); } })
 	}
 });
+
+// angular deneme route
+
+router.get('/angular', function (req, res) {
+    res.render('angular');
+});
+
+router.post('/angposted' , function (req, res) {
+    var obj = fs.readFileSync('./public/people.json', 'utf8');
+    var obj2 = JSON.parse(obj);
+    var arr = [];    
+    for (i = 0; i < obj2.length; i++) { arr.push(obj2[i]); };
+    arr.push(req.body);
+    var last = JSON.stringify(arr);
+    fs.writeFile('./public/people.json', last, function (err) {
+        if (err) return console.log(err);
+        console.log('dbye yazıldı');
+        res.send({ redirect: '/angular' });
+    }); 
+});
+
+router.post('/angdelete' , function (req, res) {
+    var arr = [{}];
+    var last = JSON.stringify(arr);
+    fs.writeFile('./public/people.json', last, function (err) {
+        if (err) return console.log(err);
+        console.log('dbye yazıldı');
+        res.send({ redirect: '/angular' });
+    });
+});
+
 
 module.exports = router;
 

@@ -1,12 +1,14 @@
 doctype html
-html
+html(ng-app='angulardeneme')
   head
     meta(content='text/html', charset='utf-8')
     link(rel='stylesheet', href='/stylesheets/normalize.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css')
     script(src='http://code.jquery.com/jquery-1.11.0.min.js', type='text/javascript', charset='utf-8')
+    script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js')
+    script(type='text/javascript', src='/javascripts/angapp.js')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-  body
+  body(ng-controller='mainCtrl')
     block content
 
