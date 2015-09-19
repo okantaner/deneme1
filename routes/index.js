@@ -284,8 +284,12 @@ router.get('/angular', function (req, res) {
 router.post('/angposted' , function (req, res) {
     var obj = fs.readFileSync('./public/people.json', 'utf8');
     var obj2 = JSON.parse(obj);
-    var arr = [];    
-    for (i = 0; i < obj2.length; i++) { arr.push(obj2[i]); };
+    var arr = [];
+    var str = JSON.stringify(req.body);
+    
+    for (i = 0; i < obj2.length; i++) { if (JSON.stringify(obj2[i]) === str) {} else { arr.push(obj2[i]); } };
+    
+
     arr.push(req.body);
     var last = JSON.stringify(arr);
     fs.writeFile('./public/people.json', last, function (err) {
@@ -295,8 +299,15 @@ router.post('/angposted' , function (req, res) {
     }); 
 });
 
-router.post('/angdelete' , function (req, res) {
-    var arr = [{}];
+router.delete('/angposted' , function (req, res) {
+
+    var obj = fs.readFileSync('./public/people.json', 'utf8');
+    var obj2 = JSON.parse(obj);
+    var arr = [];                                                       
+    for (i = 0; i < obj2.length; i++) { arr.push(obj2[i]); };
+
+    arr.splice(arr.indexOf(req.body), 1)
+
     var last = JSON.stringify(arr);
     fs.writeFile('./public/people.json', last, function (err) {
         if (err) return console.log(err);
@@ -304,7 +315,6 @@ router.post('/angdelete' , function (req, res) {
         res.send({ redirect: '/angular' });
     });
 });
-
 
 module.exports = router;
 

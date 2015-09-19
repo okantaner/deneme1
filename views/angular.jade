@@ -7,8 +7,18 @@ block content
           input.name(type='text', ng-model='person.name')
           input.profession(type='text', ng-model='person.profession')
           input.hometown(type='text', ng-model='person.hometown')
-          button(ng-click='save(person)') Kaydet
-    .main
-          button(ng-click='delete()') Patlat
-    .debug
-      pre(ng-bind='people | json').
+          button(ng-click='save(person)') Save
+          button(ng-click='remove(person)') X
+      .newPerson.fields
+        h3 Add Person
+        label
+          | Name
+          input(type='text', ng-model='newPerson.name')
+        label
+          | Profession
+          input(type='text', ng-model='newPerson.profession')
+        label
+          | Hometown
+          input(type='text', ng-model='newPerson.hometown')
+        button(ng-click='add(newPerson)')
+          | Add
